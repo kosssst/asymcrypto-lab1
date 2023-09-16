@@ -1,10 +1,10 @@
 package test;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class MainTest {
     @Test
-    void test() {
+    public void test() {
 
     }
 }
