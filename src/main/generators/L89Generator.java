@@ -1,6 +1,4 @@
-package main;
-
-import java.math.BigInteger;
+package main.generators;
 
 public class L89Generator {
     private static final String ZEROS = "0".repeat(89);

@@ -1,4 +1,4 @@
-package main;
+package main.generators;
 
 public class L20Generator {
     private static final String ZEROS = "0".repeat(20);
