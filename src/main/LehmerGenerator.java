@@ -18,18 +18,9 @@ public class LehmerGenerator {
 
     public int lehmerHigh() {
         generate();
-        String s = Integer.toBinaryString(seed);
-        StringBuilder sb = new StringBuilder();
-
-        if (s.length() <= 8) {
-            return Integer.parseInt(s, 2);
-        }
-
-        for (int i = 0; i < 8; i++) {
-            sb.append(s.charAt(i));
-        }
-
-        return Integer.parseInt(sb.toString(), 2);
+        String seedString = String.format("%32s", Integer.toBinaryString(seed))
+                .replace(' ', '0');
+        return Integer.parseInt(seedString.substring(0, 8), 2);
     }
 
     public int lehmerLow() {
