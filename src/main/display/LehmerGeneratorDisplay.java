@@ -1,6 +1,6 @@
 package main.display;
 
-import main.LehmerGenerator;
+import main.generators.LehmerGenerator;
 
 public class LehmerGeneratorDisplay {
     public static void main(String[] args) {
