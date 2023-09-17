@@ -11,7 +11,7 @@ public class Main {
 // done Lehmer high
 // done L20
 // done 89
-// Geffe kosssst
+// done Geffe
 // Wolfram // linrin
 // bib // linrin
 // BM
