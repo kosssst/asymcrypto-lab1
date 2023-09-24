@@ -1,8 +1,9 @@
 package main.util;
 
 public class MathUtil {
+    private static StringBuilder result;
     public static String xor(String a, String b) {
-        StringBuilder result = new StringBuilder();
+        result = new StringBuilder();
         for (int i = 0; i < 32; i++) {
             result.append((a.charAt(i) - '0') ^ (b.charAt(i) - '0'));
         }
@@ -10,7 +11,7 @@ public class MathUtil {
     }
 
     public static String or(String a, String b) {
-        StringBuilder result = new StringBuilder();
+        result = new StringBuilder();
         for (int i = 0; i < 32; i++) {
             result.append((a.charAt(i) - '0') | (b.charAt(i) - '0'));
         }
