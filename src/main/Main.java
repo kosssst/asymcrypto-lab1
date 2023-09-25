@@ -13,8 +13,8 @@ public class Main {
 // done 89
 // done Geffe
 // done Wolfram // kosssst
-// bib // linrin
-// BM
-// BM-bites
-// BBS
-// BBS-bite
+// bib //kosssst
+// BM // linrin
+// BM-bites // linrin
+// BBS // linrin
+// BBS-bite // linrin
