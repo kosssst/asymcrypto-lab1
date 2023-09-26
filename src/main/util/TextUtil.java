@@ -18,4 +18,14 @@ public class TextUtil {
         }
         return resultStringBuilder.toString();
     }
+
+    public static int countMatches(String sequence, char target) {
+        int num = 0;
+        for (int i = 0; i < sequence.length(); i++) {
+            if (sequence.charAt(i) == target) {
+                num += 1;
+            }
+        }
+        return num;
+    }
 }
