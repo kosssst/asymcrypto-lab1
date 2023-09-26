@@ -32,6 +32,6 @@ public class BBSGenerator {
     public String generateByte() {
         r = r.pow(2).mod(N);
 
-        return r.mod((new BigInteger("256", 16))).toString(16);
+        return r.mod((new BigInteger("256", 16))).toString(16).toUpperCase();
     }
 }
