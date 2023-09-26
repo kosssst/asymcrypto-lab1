@@ -2,34 +2,28 @@ package main.generators;
 
 import java.util.Random;
 
-public class LehmerGenerator {
+public class LehmerHighGenerator {
     private static final int M = (int) Math.pow(2, 32);
     private static final int A = (int) Math.pow(2, 16) + 1;
     private static final int C = 119;
     private int seed;
 
-    public LehmerGenerator() {
+    public LehmerHighGenerator() {
         seed = new Random().nextInt();
     }
 
-    public LehmerGenerator(int seed) {
+    public LehmerHighGenerator(int seed) {
         this.seed = seed;
     }
 
-    public int lehmerHigh() {
-        generate();
+    public int generate() {
+        seed = next(seed);
         String seedString = String.format("%32s", Integer.toBinaryString(seed))
                 .replace(' ', '0');
         return Integer.parseInt(seedString.substring(0, 8), 2);
     }
 
-    public int lehmerLow() {
-        generate();
-        return seed & 0xFF;
+    private int next(int seed) {
+        return (A * seed + C) % M;
     }
-
-    private void generate() {
-        this.seed = (A * this.seed + C) % M;
-    }
-
 }
