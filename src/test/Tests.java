@@ -3,6 +3,8 @@ package test;
 import main.util.TextUtil;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Tests {
@@ -35,6 +37,40 @@ public class Tests {
         NormalDistribution standardDistribution = new NormalDistribution();
         double z = standardDistribution.inverseCumulativeProbability(1 - alpha);
         double hi2Alpha = Math.sqrt(8) * z + 4;
+
+        return hi2 <= hi2Alpha;
+    }
+
+    public static boolean criterionOfBinarySequenceHomogeneityForBits(String sequence, double alpha) {
+        int r = 16;
+        ArrayList<String> subsequences = new ArrayList<>();
+        Map<String, Integer> zeros = new HashMap<>();
+        Map<String, Integer> ones = new HashMap<>();
+        int substringLength = sequence.length() / r;
+        NormalDistribution normalDistribution = new NormalDistribution();
+
+        for (int i = 0; i < sequence.length() - substringLength; i += substringLength) {
+            subsequences.add(sequence.substring(i, i + substringLength));
+        }
+
+        for (String s : subsequences) {
+            zeros.put(s, TextUtil.countMatches(s, '0'));
+            ones.put(s, TextUtil.countMatches(s, '1'));
+        }
+
+        double hi2 = 0;
+        int v = 0;
+        for (int j = 0; j < r; j++) {
+            v += zeros.get(subsequences.get(j));
+        }
+        for (int i = 0; i < r; i++) {
+            hi2 += Math.pow(zeros.get(subsequences.get(i)), 2) / (v * substringLength);
+        }
+        for (int i = 0; i < r; i++) {
+            hi2 += Math.pow(ones.get(subsequences.get(i)), 2) / (v * substringLength);
+        }
+
+        double hi2Alpha = Math.sqrt(2 * (r - 1)) * normalDistribution.inverseCumulativeProbability(1 - alpha) + (r - 1);
 
         return hi2 <= hi2Alpha;
     }
