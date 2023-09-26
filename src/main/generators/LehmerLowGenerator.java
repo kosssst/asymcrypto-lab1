@@ -16,9 +16,11 @@ public class LehmerLowGenerator {
         this.seed = seed;
     }
 
-    public int generate() {
+    public String generate() {
         seed = next(seed);
-        return seed & 0xFF;
+        String seedString = String.format("%32s", Integer.toBinaryString(seed))
+                .replace(' ', '0');
+        return seedString.substring(24);
     }
 
     private int next(int seed) {
