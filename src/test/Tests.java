@@ -3,6 +3,7 @@ package test;
 import main.util.TextUtil;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,7 +50,7 @@ public class Tests {
         int substringLength = sequence.length() / r;
         NormalDistribution normalDistribution = new NormalDistribution();
 
-        for (int i = 0; i < sequence.length() - substringLength; i += substringLength) {
+        for (int i = 0; i <= sequence.length() - substringLength; i += substringLength) {
             subsequences.add(sequence.substring(i, i + substringLength));
         }
 
@@ -59,16 +60,20 @@ public class Tests {
         }
 
         double hi2 = 0;
-        int v = 0;
+        int v0 = 0;
+        int v1 = 0;
         for (int j = 0; j < r; j++) {
-            v += zeros.get(subsequences.get(j));
+            v0 += zeros.get(subsequences.get(j));
+            v1 += ones.get(subsequences.get(j));
         }
         for (int i = 0; i < r; i++) {
-            hi2 += Math.pow(zeros.get(subsequences.get(i)), 2) / (v * substringLength);
+            hi2 += Math.pow(zeros.get(subsequences.get(i)), 2) / ((long) v0 * substringLength);
         }
         for (int i = 0; i < r; i++) {
-            hi2 += Math.pow(ones.get(subsequences.get(i)), 2) / (v * substringLength);
+            hi2 += Math.pow(ones.get(subsequences.get(i)), 2) / ((long) v1 * substringLength);
         }
+        hi2 -= 1;
+        hi2 *= (r * substringLength);
 
         double hi2Alpha = Math.sqrt(2 * (r - 1)) * normalDistribution.inverseCumulativeProbability(1 - alpha) + (r - 1);
 
