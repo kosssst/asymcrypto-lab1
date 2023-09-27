@@ -1,54 +1,54 @@
 package test;
 
-import main.generators.L20Generator;
+import main.generators.WolframGenerator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class L20GeneratorTest {
-    private final L20Generator generator = new L20Generator();
+public class WolframGeneratorTest {
+    private final WolframGenerator generator = new WolframGenerator();
 
     @Test
-    void testL20GeneratorFirstCriterionWithAlpha001() {
+    void testWolframGeneratorFirstCriterionWithAlpha001() {
         Assertions.assertTrue(Tests.criterionOfUniformityOfBits(generator.generate(2000000), 0.01));
     }
 
     @Test
-    void testL20GeneratorFirstCriterionWithAlpha005() {
+    void testWolframGeneratorFirstCriterionWithAlpha005() {
         Assertions.assertTrue(Tests.criterionOfUniformityOfBits(generator.generate(2000000), 0.05));
     }
 
     @Test
-    void testL20GeneratorFirstCriterionWithAlpha01() {
+    void testWolframGeneratorFirstCriterionWithAlpha01() {
         Assertions.assertTrue(Tests.criterionOfUniformityOfBits(generator.generate(2000000), 0.1));
     }
 
     @Test
-    void testL20GeneratorSecondCriterionWithAlpha001() {
+    void testWolframGeneratorSecondCriterionWithAlpha001() {
         Assertions.assertTrue(Tests.criterionOfDistributionIndependenceForBits(generator.generate(2000000), 0.01));
     }
 
     @Test
-    void testL20GeneratorSecondCriterionWithAlpha005() {
+    void testWolframGeneratorSecondCriterionWithAlpha005() {
         Assertions.assertTrue(Tests.criterionOfDistributionIndependenceForBits(generator.generate(2000000), 0.05));
     }
 
     @Test
-    void testL20GeneratorSecondCriterionWithAlpha01() {
+    void testWolframGeneratorSecondCriterionWithAlpha01() {
         Assertions.assertTrue(Tests.criterionOfDistributionIndependenceForBits(generator.generate(2000000), 0.1));
     }
 
     @Test
-    void testL20GeneratorThirdCriterionWithAlpha001() {
+    void testWolframGeneratorThirdCriterionWithAlpha001() {
         Assertions.assertTrue(Tests.criterionOfBinarySequenceHomogeneityForBits(generator.generate(2000000), 0.01));
     }
 
     @Test
-    void testL20GeneratorThirdCriterionWithAlpha005() {
+    void testWolframGeneratorThirdCriterionWithAlpha005() {
         Assertions.assertTrue(Tests.criterionOfBinarySequenceHomogeneityForBits(generator.generate(2000000), 0.05));
     }
 
     @Test
-    void testL20GeneratorThirdCriterionWithAlpha01() {
+    void testWolframGeneratorThirdCriterionWithAlpha01() {
         Assertions.assertTrue(Tests.criterionOfBinarySequenceHomogeneityForBits(generator.generate(2000000), 0.1));
     }
 }
