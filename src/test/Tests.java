@@ -28,10 +28,10 @@ public class Tests {
         int a0 = vij.get("00") + vij.get("10");
         int a1 = vij.get("01") + vij.get("11");
 
-        double hi2 = n * ((Math.pow(vij.get("00"), 2) / (v0 * a0))
-                + (Math.pow(vij.get("01"), 2) / (v0 * a1))
-                + (Math.pow(vij.get("10"), 2) / (v1 * a0))
-                + (Math.pow(vij.get("11"), 2) / (v1 * a1)) - 1);
+        double hi2 = n * ((Math.pow(vij.get("00"), 2) / ((long) v0 * a0))
+                + (Math.pow(vij.get("01"), 2) / ((long) v0 * a1))
+                + (Math.pow(vij.get("10"), 2) / ((long) v1 * a0))
+                + (Math.pow(vij.get("11"), 2) / ((long) v1 * a1)) - 1);
 
         NormalDistribution standardDistribution = new NormalDistribution();
         double z = standardDistribution.inverseCumulativeProbability(1 - alpha);

@@ -1,8 +1,14 @@
 package test;
 
-import main.generators.*;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+
+@RunWith(Suite.class)
+@Suite.SuiteClasses({
+        BuildInGeneratorTest.class,
+        LehmerHighGeneratorTest.class,
+        LehmerLowGeneratorTest.class
+})
 
 public class MainTest {
 
