@@ -12,27 +12,16 @@ public class L20Generator {
         }
     }
 
-    public L20Generator(String seed) throws Exception {
-        this.seed = String.format("%20s", seed).replace(' ', '0');
-        if (this.seed.equals(ZEROS)) throw new Exception("Seed can not be zero");
-    }
-
-    public L20Generator(int seed) throws Exception {
-        seed %= (int) Math.pow(2, 20);
-        this.seed = String.format("%20s", Integer.toBinaryString(seed)).replace(' ', '0');
-        if (this.seed.equals(ZEROS)) throw new Exception("Seed can not be zero");
-    }
-
     public String generate(int length) {
-        String sequence = this.seed;
+        StringBuilder result = new StringBuilder();
 
-        if (length <= 20) return sequence.substring(0, length);
-
-        for (int i = 0; i < length-20; i++) {
-            sequence += next(sequence);
+        for (int i = 0; i < length; i++) {
+            result.append(seed.charAt(0));
+            seed += next(seed);
+            seed = seed.substring(1);
         }
 
-        return sequence;
+        return result.toString();
     }
 
     private int next(String sequence) {

@@ -18,15 +18,15 @@ public class L89Generator {
     }
 
     public String generate(int length) {
-        String sequence = this.seed;
+        StringBuilder result = new StringBuilder();
 
-        if (length <= 89) return sequence.substring(0, length);
-
-        for (int i = 0; i < length-89; i++) {
-            sequence += next(sequence);
+        for (int i = 0; i < length; i++) {
+            result.append(seed.charAt(0));
+            seed += next(seed);
+            seed = seed.substring(1);
         }
 
-        return sequence;
+        return result.toString();
     }
 
     private int next(String sequence) {
