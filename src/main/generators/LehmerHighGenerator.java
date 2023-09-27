@@ -16,11 +16,17 @@ public class LehmerHighGenerator {
         this.seed = seed;
     }
 
-    public String generate() {
-        seed = next(seed);
-        String seedString = String.format("%32s", Integer.toBinaryString(seed))
-                .replace(' ', '0');
-        return seedString.substring(0, 8);
+    public String generate(int length) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < length/8; i++) {
+            seed = next(seed);
+            String seedString = String.format("%32s", Integer.toBinaryString(seed))
+                    .replace(' ', '0');
+            sb.append(seedString.substring(0, 8));
+        }
+
+        return sb.toString();
     }
 
     private int next(int seed) {
