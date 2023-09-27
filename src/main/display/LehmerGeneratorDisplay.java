@@ -9,13 +9,13 @@ public class LehmerGeneratorDisplay {
         LehmerHighGenerator generator2 = new LehmerHighGenerator(123456);
 
         for (int i = 0; i < 12; i++) {
-            System.out.println(generator1.generate());
+            System.out.println(generator1.generate(100));
         }
 
         System.out.println();
 
         for (int i = 0; i < 12; i++) {
-            System.out.println(generator2.generate());
+            System.out.println(generator2.generate(100));
         }
     }
 }

@@ -1,54 +1,54 @@
 package test;
 
-import main.generators.LehmerHighGenerator;
+import main.generators.GeffeGenerator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class LehmerHighGeneratorTest {
-    private final LehmerHighGenerator generator = new LehmerHighGenerator();
-    // todo do exception in third's test
+public class GeffeGeneratorTest {
+    private final GeffeGenerator generator = new GeffeGenerator();
+
     @Test
-    void testLehmerHighGeneratorFirstCriterionWithAlpha001() {
+    void testGeffeGeneratorFirstCriterionWithAlpha001() {
         Assertions.assertTrue(Tests.criterionOfUniformityOfBits(generator.generate(1000000), 0.01));
     }
 
     @Test
-    void testLehmerHighGeneratorFirstCriterionWithAlpha005() {
+    void testGeffeGeneratorFirstCriterionWithAlpha005() {
         Assertions.assertTrue(Tests.criterionOfUniformityOfBits(generator.generate(1000000), 0.05));
     }
 
     @Test
-    void testLehmerHighGeneratorFirstCriterionWithAlpha01() {
+    void testGeffeGeneratorFirstCriterionWithAlpha01() {
         Assertions.assertTrue(Tests.criterionOfUniformityOfBits(generator.generate(1000000), 0.1));
     }
 
     @Test
-    void testLehmerHighGeneratorSecondCriterionWithAlpha001() {
+    void testGeffeGeneratorSecondCriterionWithAlpha001() {
         Assertions.assertTrue(Tests.criterionOfDistributionIndependenceForBits(generator.generate(1000000), 0.01));
     }
 
     @Test
-    void testLehmerHighGeneratorSecondCriterionWithAlpha005() {
+    void testGeffeGeneratorSecondCriterionWithAlpha005() {
         Assertions.assertTrue(Tests.criterionOfDistributionIndependenceForBits(generator.generate(1000000), 0.05));
     }
 
     @Test
-    void testLehmerHighGeneratorSecondCriterionWithAlpha01() {
+    void testGeffeGeneratorSecondCriterionWithAlpha01() {
         Assertions.assertTrue(Tests.criterionOfDistributionIndependenceForBits(generator.generate(1000000), 0.1));
     }
 
     @Test
-    void testLehmerHighGeneratorThirdCriterionWithAlpha001() {
+    void testGeffeGeneratorThirdCriterionWithAlpha001() {
         Assertions.assertTrue(Tests.criterionOfBinarySequenceHomogeneityForBits(generator.generate(1000000), 0.01));
     }
 
     @Test
-    void testLehmerHighGeneratorThirdCriterionWithAlpha005() {
+    void testGeffeGeneratorThirdCriterionWithAlpha005() {
         Assertions.assertTrue(Tests.criterionOfBinarySequenceHomogeneityForBits(generator.generate(1000000), 0.05));
     }
 
     @Test
-    void testLehmerHighGeneratorThirdCriterionWithAlpha01() {
+    void testGeffeGeneratorThirdCriterionWithAlpha01() {
         Assertions.assertTrue(Tests.criterionOfBinarySequenceHomogeneityForBits(generator.generate(1000000), 0.1));
     }
 }
