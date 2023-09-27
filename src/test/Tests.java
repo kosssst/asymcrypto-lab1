@@ -2,8 +2,6 @@ package test;
 
 import main.util.TextUtil;
 import org.apache.commons.math3.distribution.NormalDistribution;
-
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
