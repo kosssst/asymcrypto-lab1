@@ -13,10 +13,6 @@ public class BBSGenerator {
         r = new BigInteger(generate, 2);
     }
 
-    public BBSGenerator(int length) {
-        this.r = new BigInteger(BuildInGenerator.generate(length), 2);
-    }
-
     public String generate(int length) {
         StringBuilder sb = new StringBuilder();
 
@@ -29,9 +25,16 @@ public class BBSGenerator {
         return sb.toString();
     }
 
-    public String generateByte() {
-        r = r.pow(2).mod(N);
+    public String generateByte(int length) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            result.append(nextByte(r));
+            r = r.pow(2).mod(N);
+        }
+        return result.toString();
+    }
 
-        return r.mod((new BigInteger("256", 16))).toString(16).toUpperCase();
+    private String nextByte(BigInteger r) {
+        return String.format("%2s", r.mod(new BigInteger(String.valueOf(256))).toString(16).toUpperCase()).replace(' ', '0');
     }
 }
