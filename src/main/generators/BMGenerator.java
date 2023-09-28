@@ -12,10 +12,6 @@ public class BMGenerator {
         T = new BigInteger(generate, 2);
     }
 
-    public BMGenerator(int length) {
-        this.T = new BigInteger(BuildInGenerator.generate(length), 2);
-    }
-
     public String generate(int length) {
         StringBuilder sb = new StringBuilder();
 
@@ -28,9 +24,13 @@ public class BMGenerator {
         return sb.toString();
     }
 
-    public String generateByte() {
-        T = A.modPow(T, P);
-        return nextByte(T);
+    public String generateByte(int length) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            result.append(calculateK(T));
+            T = A.modPow(T, P);
+        }
+        return result.toString();
     }
 
     private String next(BigInteger T) {
@@ -40,9 +40,9 @@ public class BMGenerator {
         return condition ? "0" : "1";
     }
 
-    private String nextByte(BigInteger T) {
+    private String calculateK(BigInteger T) {
         BigInteger unit = P.subtract(BigInteger.ONE).divide(BigInteger.valueOf(256));
 
-        return T.divide(unit).toString(16).toUpperCase();
+        return String.format("%2s", T.divide(unit).toString(16).toUpperCase()).replace(' ', '0');
     }
 }
