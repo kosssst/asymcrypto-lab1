@@ -11,7 +11,7 @@ public class Tests {
 
     public static boolean criterionOfUniformityOfBits(String sequence, double alpha) {
         Map<String, Integer> bytes = TextUtil.getBytes(sequence);
-        double n = (double) sequence.length() / 256;
+        double n = (double) sequence.length() / 512;
         NormalDistribution normalDistribution = new NormalDistribution();
 
         double hi2 = 0;
@@ -25,7 +25,7 @@ public class Tests {
     }
 
     public static boolean criterionOfDistributionIndependenceForBits(String sequence, double alpha) {
-        int n = sequence.length() / 2;
+        int n = sequence.length() / 4;
         Map<ArrayList<String>, Integer> pairs = TextUtil.countPairs(sequence);
         NormalDistribution normalDistribution = new NormalDistribution();
 
@@ -33,7 +33,9 @@ public class Tests {
         for (String i : TextUtil.bytes) {
             for (String j : TextUtil.bytes) {
                 ArrayList<String> pair = new ArrayList<>(List.of(i, j));
-                hi2 += Math.pow(pairs.get(pair), 2) / ((long) TextUtil.countPairsWithByteInFirstPlace(pairs, i) * TextUtil.countPairsWithByteInSecondPlace(pairs, j));
+                int first = TextUtil.countPairsWithByteInFirstPlace(pairs, i);
+                int second = TextUtil.countPairsWithByteInSecondPlace(pairs, j);
+                hi2 += Math.pow(pairs.get(pair), 2) / ((long) first * second);
             }
         }
         hi2 = (hi2 - 1) * n;

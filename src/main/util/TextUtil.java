@@ -74,7 +74,7 @@ public class TextUtil {
             put("1111", 'F');
         }};
 
-        for (int i = 0; i < bits.length() - 4; i += 4) {
+        for (int i = 0; i <= bits.length() - 4; i += 4) {
             result.append(dictionary.get(bits.substring(i, i + 4)));
         }
 
@@ -84,7 +84,7 @@ public class TextUtil {
     public static Map<String, Integer> getBytes(String input) {
         Map<String, Integer> result = new HashMap<>();
 
-        for (int i = 0; i < input.length() - 2; i += 2) {
+        for (int i = 0; i <= input.length() - 2; i += 2) {
             String Byte = input.substring(i, i + 2);
             if (!result.containsKey(Byte)) {
                 result.put(Byte, 0);
@@ -104,7 +104,7 @@ public class TextUtil {
             }
         }
 
-        for (int i = 0; i < input.length() - 4; i += 4) {
+        for (int i = 0; i <= input.length() - 4; i += 4) {
             String sub = input.substring(i, i + 4);
             ArrayList<String> temp = new ArrayList<>(List.of(sub.substring(0, 2), sub.substring(2, 4)));
             result.put(temp, result.get(temp) + 1);
@@ -136,7 +136,7 @@ public class TextUtil {
     public static int countMatchedBytes(String input, String match) {
         int result = 0;
 
-        for (int i = 0; i < input.length() - 2; i += 2) {
+        for (int i = 0; i <= input.length() - 2; i += 2) {
             if (input.substring(i, i + 2).equals(match)) {
                 result++;
             }
