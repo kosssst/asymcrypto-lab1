@@ -35,21 +35,6 @@ public class TextUtil {
         return num;
     }
 
-    public static Map<String, Integer> countPairsOfBits(String sequence) {
-        Map<String, Integer> result = new HashMap<>() {{
-            put("00", 0);
-            put("01", 0);
-            put("10", 0);
-            put("11", 0);
-        }};
-        for (int i = 0; i < sequence.length() - 1; i += 2) {
-            String key = "" + sequence.charAt(i) + sequence.charAt(i + 1);
-            result.put(key, result.get(key) + 1);
-        }
-
-        return result;
-    }
-
     public static String bytesToBits(String bytes) {
         StringBuilder bits = new StringBuilder();
         Map<Character, String> dictionary = new HashMap<>() {{
@@ -115,6 +100,44 @@ public class TextUtil {
                 result.put(Byte, 0);
             }
             result.put(Byte, result.get(Byte) + 1);
+        }
+
+        return result;
+    }
+
+    public static Map<ArrayList<String>, Integer> countPairs(String input) {
+        Map<ArrayList<String>, Integer> result = new HashMap<>();
+
+        for (String i : bytes) {
+            for (String j : bytes) {
+                result.put(new ArrayList<>(List.of(i, j)), 0);
+            }
+        }
+
+        for (int i = 0; i < input.length() - 4; i += 4) {
+            String sub = input.substring(i, i + 4);
+            ArrayList<String> temp = new ArrayList<>(List.of(sub.substring(0, 2), sub.substring(2, 4)));
+            result.put(temp, result.get(temp) + 1);
+        }
+
+        return result;
+    }
+
+    public static int countPairsWithByteInFirstPlace(Map<ArrayList<String>, Integer> pairs, String Byte) {
+        int result = 0;
+
+        for (String i : bytes) {
+            result += pairs.get(new ArrayList<>(List.of(Byte, i)));
+        }
+
+        return result;
+    }
+
+    public static int countPairsWithByteInSecondPlace(Map<ArrayList<String>, Integer> pairs, String Byte) {
+        int result = 0;
+
+        for (String i : bytes) {
+            result += pairs.get(new ArrayList<>(List.of(i, Byte)));
         }
 
         return result;

@@ -4,6 +4,7 @@ import main.util.TextUtil;
 import org.apache.commons.math3.distribution.NormalDistribution;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Tests {
@@ -25,20 +26,19 @@ public class Tests {
 
     public static boolean criterionOfDistributionIndependenceForBits(String sequence, double alpha) {
         int n = sequence.length() / 2;
-        Map<String, Integer> vij = TextUtil.countPairsOfBits(sequence);
-        int v0 = vij.get("00") + vij.get("01");
-        int v1 = vij.get("10") + vij.get("11");
-        int a0 = vij.get("00") + vij.get("10");
-        int a1 = vij.get("01") + vij.get("11");
+        Map<ArrayList<String>, Integer> pairs = TextUtil.countPairs(sequence);
+        NormalDistribution normalDistribution = new NormalDistribution();
 
-        double hi2 = n * ((Math.pow(vij.get("00"), 2) / ((long) v0 * a0))
-                + (Math.pow(vij.get("01"), 2) / ((long) v0 * a1))
-                + (Math.pow(vij.get("10"), 2) / ((long) v1 * a0))
-                + (Math.pow(vij.get("11"), 2) / ((long) v1 * a1)) - 1);
+        double hi2 = 0;
+        for (String i : TextUtil.bytes) {
+            for (String j : TextUtil.bytes) {
+                ArrayList<String> pair = new ArrayList<>(List.of(i, j));
+                hi2 += Math.pow(pairs.get(pair), 2) / ((long) TextUtil.countPairsWithByteInFirstPlace(pairs, i) * TextUtil.countPairsWithByteInSecondPlace(pairs, j));
+            }
+        }
+        hi2 = (hi2 - 1) * n;
 
-        NormalDistribution standardDistribution = new NormalDistribution();
-        double z = standardDistribution.inverseCumulativeProbability(1 - alpha);
-        double hi2Alpha = Math.sqrt(8) * z + 4;
+        double hi2Alpha = Math.sqrt(2 * Math.pow(255, 2)) * normalDistribution.inverseCumulativeProbability(1 - alpha) + Math.pow(255, 2);
 
         return hi2 <= hi2Alpha;
     }
