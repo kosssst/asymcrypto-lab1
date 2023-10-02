@@ -25,16 +25,6 @@ public class TextUtil {
         return resultStringBuilder.toString();
     }
 
-    public static int countMatches(String sequence, char target) {
-        int num = 0;
-        for (int i = 0; i < sequence.length(); i++) {
-            if (sequence.charAt(i) == target) {
-                num += 1;
-            }
-        }
-        return num;
-    }
-
     public static String bytesToBits(String bytes) {
         StringBuilder bits = new StringBuilder();
         Map<Character, String> dictionary = new HashMap<>() {{
@@ -138,6 +128,18 @@ public class TextUtil {
 
         for (String i : bytes) {
             result += pairs.get(new ArrayList<>(List.of(i, Byte)));
+        }
+
+        return result;
+    }
+
+    public static int countMatchedBytes(String input, String match) {
+        int result = 0;
+
+        for (int i = 0; i < input.length() - 2; i += 2) {
+            if (input.substring(i, i + 2).equals(match)) {
+                result++;
+            }
         }
 
         return result;
