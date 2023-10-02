@@ -73,4 +73,46 @@ public class TextUtil {
 
         return bits.toString();
     }
+
+    public static String bitsToBytes(String bits) {
+        StringBuilder result = new StringBuilder();
+        Map<String, Character> dictionary = new HashMap<>() {{
+            put("0000", '0');
+            put("0001", '1');
+            put("0010", '2');
+            put("0011", '3');
+            put("0100", '4');
+            put("0101", '5');
+            put("0110", '6');
+            put("0111", '7');
+            put("1000", '8');
+            put("1001", '9');
+            put("1010", 'A');
+            put("1011", 'B');
+            put("1100", 'C');
+            put("1101", 'D');
+            put("1110", 'E');
+            put("1111", 'F');
+        }};
+
+        for (int i = 0; i < bits.length() - 4; i += 4) {
+            result.append(dictionary.get(bits.substring(i, i + 4)));
+        }
+
+        return result.toString();
+    }
+
+    public static Map<String, Integer> getBytes(String input) {
+        Map<String, Integer> result = new HashMap<>();
+
+        for (int i = 0; i < input.length() - 2; i += 2) {
+            String Byte = input.substring(i, i + 2);
+            if (!result.containsKey(Byte)) {
+                result.put(Byte, 0);
+            }
+            result.put(Byte, result.get(Byte) + 1);
+        }
+
+        return result;
+    }
 }
