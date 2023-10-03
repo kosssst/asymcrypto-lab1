@@ -16,7 +16,9 @@ public class Tests {
 
         double hi2 = 0;
         for (String b : TextUtil.bytes) {
-            hi2 += Math.pow(bytes.get(b) - n, 2) / n;
+            if (bytes.containsKey(b)) {
+                hi2 += Math.pow(bytes.get(b) - n, 2) / n;
+            }
         }
 
         double hi2Alpha = Math.sqrt(2 * 255) * normalDistribution.inverseCumulativeProbability(1 - alpha) + 255;
