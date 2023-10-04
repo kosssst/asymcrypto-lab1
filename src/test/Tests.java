@@ -23,6 +23,8 @@ public class Tests {
 
         double hi2Alpha = Math.sqrt(2 * 255) * normalDistribution.inverseCumulativeProbability(1 - alpha) + 255;
 
+        System.out.println("First test, a = " + alpha + " , hi2 = " + hi2 + ", hi2(1-a) = " + hi2Alpha);
+
         return hi2 <= hi2Alpha;
     }
 
@@ -43,6 +45,8 @@ public class Tests {
         hi2 = (hi2 - 1) * n;
 
         double hi2Alpha = Math.sqrt(2 * Math.pow(255, 2)) * normalDistribution.inverseCumulativeProbability(1 - alpha) + Math.pow(255, 2);
+
+        System.out.println("Second test, a = " + alpha + " , hi2 = " + hi2 + ", hi2(1-a) = " + hi2Alpha);
 
         return hi2 <= hi2Alpha;
     }
@@ -70,6 +74,8 @@ public class Tests {
         hi2 = (hi2 - 1) * (substringLength * r);
 
         double hi2Alpha = Math.sqrt(2 * 255 * (r - 1)) * normalDistribution.inverseCumulativeProbability(1 - alpha) + (255 * (r - 1));
+
+        System.out.println("Third test, a = " + alpha + " , hi2 = " + hi2 + ", hi2(1-a) = " + hi2Alpha);
 
         return hi2 <= hi2Alpha;
     }
