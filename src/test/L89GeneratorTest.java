@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class L89GeneratorTest {
-    private final L89Generator generator = new L89Generator();
-    private final String output = TextUtil.bitsToBytes(generator.generate(16000000));
+    private static final L89Generator generator = new L89Generator();
+    private static final String output = TextUtil.bitsToBytes(generator.generate(16000000));
 
     @Test
     void testL89GeneratorFirstCriterionWithAlpha001() {

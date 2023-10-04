@@ -39,7 +39,11 @@ public class Tests {
                 ArrayList<String> pair = new ArrayList<>(List.of(i, j));
                 int first = TextUtil.countPairsWithByteInFirstPlace(pairs, i);
                 int second = TextUtil.countPairsWithByteInSecondPlace(pairs, j);
-                hi2 += Math.pow(pairs.get(pair), 2) / ((long) first * second);
+                int pairCount = pairs.get(pair);
+                if (first == 0 || second == 0) continue;
+                if (pairCount != 0) {
+                    hi2 += Math.pow(pairCount, 2) / ((long) first * second);
+                }
             }
         }
         hi2 = (hi2 - 1) * n;
@@ -68,6 +72,7 @@ public class Tests {
                 for (String k : subsequences) {
                     sumOfByte += TextUtil.countMatchedBytes(k, i);
                 }
+                if (sumOfByte == 0) continue;
                 hi2 += Math.pow(TextUtil.countMatchedBytes(j, i), 2) / ( sumOfByte * ((double) substringLength / 2));
             }
         }

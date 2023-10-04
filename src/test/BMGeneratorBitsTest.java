@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class BMGeneratorBitsTest {
-    private final BMGenerator generator = new BMGenerator();
-    private final String output = TextUtil.bitsToBytes(generator.generate(8000000));
+    private static final BMGenerator generator = new BMGenerator();
+    private static final String output = TextUtil.bitsToBytes(generator.generate(8000000));
 
     @Test
     void testBMGeneratorFirstCriterionWithAlpha001() {

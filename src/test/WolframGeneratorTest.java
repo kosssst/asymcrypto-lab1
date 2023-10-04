@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class WolframGeneratorTest {
-    private final WolframGenerator generator = new WolframGenerator();
-    private final String output = TextUtil.bitsToBytes(generator.generate(16000000));
+    private static final WolframGenerator generator = new WolframGenerator();
+    private static final String output = TextUtil.bitsToBytes(generator.generate(16000000));
 
     @Test
     void testWolframGeneratorFirstCriterionWithAlpha001() {

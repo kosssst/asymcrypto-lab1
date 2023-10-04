@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class GeffeGeneratorTest {
-    private final GeffeGenerator generator = new GeffeGenerator();
-    private final String output = TextUtil.bitsToBytes(generator.generate(16000000));
+    private static final GeffeGenerator generator = new GeffeGenerator();
+    private static final String output = TextUtil.bitsToBytes(generator.generate(16000000));
 
     @Test
     void testGeffeGeneratorFirstCriterionWithAlpha001() {

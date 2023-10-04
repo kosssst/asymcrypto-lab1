@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class LehmerHighGeneratorTest {
-    private final LehmerHighGenerator generator = new LehmerHighGenerator();
-    private final String output = TextUtil.bitsToBytes(generator.generate(16000000));
+    private static final LehmerHighGenerator generator = new LehmerHighGenerator();
+    private static final String output = TextUtil.bitsToBytes(generator.generate(16000000));
     
     @Test
     void testLehmerHighGeneratorFirstCriterionWithAlpha001() {

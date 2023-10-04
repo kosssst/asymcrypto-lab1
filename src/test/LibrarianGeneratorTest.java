@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class LibrarianGeneratorTest {
-    private final LibrarianGenerator generator = new LibrarianGenerator();
-    private final String output = TextUtil.bitsToBytes(generator.generate(16000000));
+    private static final LibrarianGenerator generator = new LibrarianGenerator();
+    private static final String output = TextUtil.bitsToBytes(generator.generate(16000000));
 
     @Test
     void testLibrarianGeneratorFirstCriterionWithAlpha001() {

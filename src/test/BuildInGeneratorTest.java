@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class BuildInGeneratorTest {
 
-    private final String output = TextUtil.bitsToBytes(BuildInGenerator.generate(8000000));
+    private static final String output = TextUtil.bitsToBytes(BuildInGenerator.generate(8000000));
 
     @Test
     void testBuildInGeneratorFirstCriterionWithAlpha001() {

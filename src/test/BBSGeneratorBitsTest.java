@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class BBSGeneratorBitsTest {
-    private final BBSGenerator generator = new BBSGenerator();
-    private final String output = TextUtil.bitsToBytes(generator.generate(16000000));
+    private static final BBSGenerator generator = new BBSGenerator();
+    private static final String output = TextUtil.bitsToBytes(generator.generate(16000000));
     @Test
     void testBBSGeneratorFirstCriterionWithAlpha001() {
         Assertions.assertTrue(Tests.criterionOfUniformityOfBits(output, 0.01));
