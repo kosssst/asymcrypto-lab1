@@ -2,8 +2,8 @@ package test;
 
 import main.util.TextUtil;
 import org.apache.commons.math3.distribution.NormalDistribution;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +52,7 @@ public class Tests {
     }
 
     public static boolean criterionOfBinarySequenceHomogeneityForBits(String sequence, double alpha) {
-        int r = 16;
+        int r = 32;
         ArrayList<String> subsequences = new ArrayList<>();
         int substringLength = sequence.length() / r;
         NormalDistribution normalDistribution = new NormalDistribution();
@@ -68,10 +68,10 @@ public class Tests {
                 for (String k : subsequences) {
                     sumOfByte += TextUtil.countMatchedBytes(k, i);
                 }
-                hi2 += Math.pow(TextUtil.countMatchedBytes(j, i), 2) / ( sumOfByte * substringLength);
+                hi2 += Math.pow(TextUtil.countMatchedBytes(j, i), 2) / ( sumOfByte * ((double) substringLength / 2));
             }
         }
-        hi2 = (hi2 - 1) * (substringLength * r);
+        hi2 = (hi2 - 1) * (((double) substringLength / 2) * r);
 
         double hi2Alpha = Math.sqrt(2 * 255 * (r - 1)) * normalDistribution.inverseCumulativeProbability(1 - alpha) + (255 * (r - 1));
 
