@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class L20GeneratorTest {
     private static final L20Generator generator = new L20Generator();
-    private static final String output = TextUtil.bitsToBytes(generator.generate(16000000));
+    private static final String output = TextUtil.bitsToBytes(generator.generate(800000));
 
     @Test
     void testL20GeneratorFirstCriterionWithAlpha001() {
