@@ -2,49 +2,62 @@ package test;
 
 import main.util.TextUtil;
 import org.apache.commons.math3.distribution.NormalDistribution;
+
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Tests {
 
     public static boolean criterionOfUniformityOfBits(String sequence, double alpha) {
-        double n = (double) sequence.length() / 2;
-        int v0 = TextUtil.countMatches(sequence, '0');
-        int v1 = TextUtil.countMatches(sequence, '1');
-        double hi2 = (Math.pow(v0 - n, 2) / n) + (Math.pow(v1 - n, 2) / n);
-        NormalDistribution standardDistribution = new NormalDistribution();
-        double z = standardDistribution.inverseCumulativeProbability(1 - alpha);
-        double hi2Alpha = 2 * z + 2;
+        Map<String, Integer> bytes = TextUtil.getBytes(sequence);
+        double n = (double) sequence.length() / 512;
+        NormalDistribution normalDistribution = new NormalDistribution();
+
+        double hi2 = 0;
+        for (String b : TextUtil.bytes) {
+            if (bytes.containsKey(b)) {
+                hi2 += Math.pow(bytes.get(b) - n, 2) / n;
+            }
+        }
+
+        double hi2Alpha = Math.sqrt(2 * 255) * normalDistribution.inverseCumulativeProbability(1 - alpha) + 255;
+
+        System.out.println("First test, a = " + alpha + " , hi2 = " + hi2 + ", hi2(1-a) = " + hi2Alpha);
 
         return hi2 <= hi2Alpha;
     }
 
     public static boolean criterionOfDistributionIndependenceForBits(String sequence, double alpha) {
-        int n = sequence.length() / 2;
-        Map<String, Integer> vij = TextUtil.countPairsOfBits(sequence);
-        int v0 = vij.get("00") + vij.get("01");
-        int v1 = vij.get("10") + vij.get("11");
-        int a0 = vij.get("00") + vij.get("10");
-        int a1 = vij.get("01") + vij.get("11");
+        int n = sequence.length() / 4;
+        Map<ArrayList<String>, Integer> pairs = TextUtil.countPairs(sequence);
+        NormalDistribution normalDistribution = new NormalDistribution();
 
-        double hi2 = n * ((Math.pow(vij.get("00"), 2) / ((long) v0 * a0))
-                + (Math.pow(vij.get("01"), 2) / ((long) v0 * a1))
-                + (Math.pow(vij.get("10"), 2) / ((long) v1 * a0))
-                + (Math.pow(vij.get("11"), 2) / ((long) v1 * a1)) - 1);
+        double hi2 = 0;
+        for (String i : TextUtil.bytes) {
+            for (String j : TextUtil.bytes) {
+                ArrayList<String> pair = new ArrayList<>(List.of(i, j));
+                int first = TextUtil.countPairsWithByteInFirstPlace(pairs, i);
+                int second = TextUtil.countPairsWithByteInSecondPlace(pairs, j);
+                int pairCount = pairs.get(pair);
+                if (first == 0 || second == 0) continue;
+                if (pairCount != 0) {
+                    hi2 += Math.pow(pairCount, 2) / ((long) first * second);
+                }
+            }
+        }
+        hi2 = (hi2 - 1) * n;
 
-        NormalDistribution standardDistribution = new NormalDistribution();
-        double z = standardDistribution.inverseCumulativeProbability(1 - alpha);
-        double hi2Alpha = Math.sqrt(8) * z + 4;
+        double hi2Alpha = Math.sqrt(2 * Math.pow(255, 2)) * normalDistribution.inverseCumulativeProbability(1 - alpha) + Math.pow(255, 2);
+
+        System.out.println("Second test, a = " + alpha + " , hi2 = " + hi2 + ", hi2(1-a) = " + hi2Alpha);
 
         return hi2 <= hi2Alpha;
     }
 
     public static boolean criterionOfBinarySequenceHomogeneityForBits(String sequence, double alpha) {
-        int r = 16;
+        int r = 32;
         ArrayList<String> subsequences = new ArrayList<>();
-        Map<String, Integer> zeros = new HashMap<>();
-        Map<String, Integer> ones = new HashMap<>();
         int substringLength = sequence.length() / r;
         NormalDistribution normalDistribution = new NormalDistribution();
 
@@ -52,28 +65,22 @@ public class Tests {
             subsequences.add(sequence.substring(i, i + substringLength));
         }
 
-        for (String s : subsequences) {
-            zeros.put(s, TextUtil.countMatches(s, '0'));
-            ones.put(s, TextUtil.countMatches(s, '1'));
-        }
-
         double hi2 = 0;
-        int v0 = 0;
-        int v1 = 0;
-        for (int j = 0; j < r; j++) {
-            v0 += zeros.get(subsequences.get(j));
-            v1 += ones.get(subsequences.get(j));
+        for (String i : TextUtil.bytes) {
+            for (String j : subsequences) {
+                long sumOfByte = 0;
+                for (String k : subsequences) {
+                    sumOfByte += TextUtil.countMatchedBytes(k, i);
+                }
+                if (sumOfByte == 0) continue;
+                hi2 += Math.pow(TextUtil.countMatchedBytes(j, i), 2) / ( sumOfByte * ((double) substringLength / 2));
+            }
         }
-        for (int i = 0; i < r; i++) {
-            hi2 += Math.pow(zeros.get(subsequences.get(i)), 2) / ((long) v0 * substringLength);
-        }
-        for (int i = 0; i < r; i++) {
-            hi2 += Math.pow(ones.get(subsequences.get(i)), 2) / ((long) v1 * substringLength);
-        }
-        hi2 -= 1;
-        hi2 *= (r * substringLength);
+        hi2 = (hi2 - 1) * (((double) substringLength / 2) * r);
 
-        double hi2Alpha = Math.sqrt(2 * (r - 1)) * normalDistribution.inverseCumulativeProbability(1 - alpha) + (r - 1);
+        double hi2Alpha = Math.sqrt(2 * 255 * (r - 1)) * normalDistribution.inverseCumulativeProbability(1 - alpha) + (255 * (r - 1));
+
+        System.out.println("Third test, a = " + alpha + " , hi2 = " + hi2 + ", hi2(1-a) = " + hi2Alpha);
 
         return hi2 <= hi2Alpha;
     }

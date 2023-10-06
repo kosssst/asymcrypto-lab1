@@ -1,17 +1,15 @@
 package main.generators;
 
+import java.security.SecureRandom;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class BuildInGenerator {
+    private static final SecureRandom random = new SecureRandom();
 
     public static String generate(int length) {
-        Random random = new Random();
-        StringBuilder builder = new StringBuilder();
-
-        for (int i = 0; i < length; i++) {
-            builder.append(random.nextInt(2));
-        }
-
-        return builder.toString();
+        return random.ints(length, 0, 2)
+                .mapToObj(String::valueOf)
+                .collect(Collectors.joining());
     }
 }
