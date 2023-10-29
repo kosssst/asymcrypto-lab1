@@ -8,7 +8,7 @@ public class LibrarianGenerator {
 
     private int seed;
 
-    private final String FILEPATH = "src/texts/it.txt";
+    private final String FILEPATH = "src/java/resources/texts/it.txt";
 
     private final String text;
 
